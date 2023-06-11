@@ -7,6 +7,11 @@ WORKDIR /app
 # Menyalin package.json dan package-lock.json ke dalam container
 COPY package*.json ./
 
+# Update paket dan instal dependensi sistem
+RUN apt-get update && apt-get install -y \
+    # list paket yang ingin diinstal di sini
+    && rm -rf /var/lib/apt/lists/*
+
 # Menjalankan perintah npm install untuk menginstal dependensi aplikasi
 RUN npm install
 
@@ -14,7 +19,9 @@ RUN npm install
 COPY . .
 
 # Menentukan port yang akan digunakan oleh aplikasi
-EXPOSE 3000
+# EXPOSE 3300
 
 # Menjalankan perintah untuk menjalankan aplikasi
 CMD ["npm", "start"]
+
+RUN chmod -R 777 .
