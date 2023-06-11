@@ -5,7 +5,7 @@ FROM node:latest
 WORKDIR /app
 
 # Menyalin package.json dan package-lock.json ke dalam container
-COPY package*.json ./
+COPY ./app/package*.json /app/
 
 # Update paket dan instal dependensi sistem
 RUN apt-get update && apt-get install -y \
@@ -14,14 +14,16 @@ RUN apt-get update && apt-get install -y \
 
 # Menjalankan perintah npm install untuk menginstal dependensi aplikasi
 RUN npm install
+# RUN RUN npm install -g nodemon
 
 # Menyalin seluruh sumber kode aplikasi ke dalam container
-COPY . .
+COPY ./app/. /app/
 
 # Menentukan port yang akan digunakan oleh aplikasi
 # EXPOSE 3300
 
 # Menjalankan perintah untuk menjalankan aplikasi
-CMD ["npm", "start"]
+# CMD ["npm", "start"]
+CMD ["npm", "run", "dev"]
 
-RUN chmod -R 777 .
+# RUN chmod -R 777 .

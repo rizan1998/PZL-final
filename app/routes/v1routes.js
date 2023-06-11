@@ -6,7 +6,7 @@ const router = express.Router();
 const roomCtrl = require("../controller/room");
 
 router.get("/", (req, res) => {
-  res.send({ message: "hello from v3 router" });
+  res.send({ message: "hello from v3 routers" });
 });
 
 /* HOTEL ROUTE */
